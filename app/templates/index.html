@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+
+{% block page_content %}
+    <div class="container mt-3">
+        <h1>Home</h1>
+        <hr>
+        <p>
+            Você {% if current_user.is_authenticated %}está logado!{% else %}<b>não</b> está  logado{% endif %}
+        </p>
+    </div>
+{% endblock %}
