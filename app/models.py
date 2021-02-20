@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(60), nullable=False, unique=True)
     password_hash = db.Column(db.String(128), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    confirmed = db.Column(db.Boolean, nullable=False, default=False)
     processos = db.relationship("Processo", backref="user", cascade="all,delete-orphan", lazy='dynamic')
 
     def __repr__(self):
@@ -49,6 +50,7 @@ class Processo(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     dt_inicio = db.Column(db.Date, nullable=False)
     dt_fim = db.Column(db.Date)
+    is_finished = db.Column(db.Boolean, nullable=False, default=False)
     etapas = db.relationship("Etapa", backref="processo", cascade="all,delete-orphan", lazy='dynamic')
 
     def __repr__(self):
@@ -72,6 +74,7 @@ class Etapa(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     dt_inicio = db.Column(db.Date, nullable=False)
     dt_fim = db.Column(db.Date)
+    is_finished = db.Column(db.Boolean, nullable=False, default=False)
 
     def __repr__(self):
         return f"<Etapa {self.titulo}>"

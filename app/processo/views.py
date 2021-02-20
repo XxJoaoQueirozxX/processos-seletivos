@@ -22,6 +22,7 @@ def add():
         p.descricao = form.descricao.data
         p.dt_inicio = form.dt_inicio.data
         p.dt_fim = form.dt_fim.data
+        p.is_finished = form.is_finished.data
         p.user = current_user
         p.save()
         flash("Processo cadastrado com sucesso", "success")
@@ -46,6 +47,7 @@ def edit(id):
         p.descricao = form.descricao.data
         p.dt_inicio = form.dt_inicio.data
         p.dt_fim = form.dt_fim.data
+        p.is_finished = form.is_finished.data
         p.save()
         flash("Processo atualizado com sucesso", "success")
         return redirect(url_for(".get_processo", id=id))
@@ -71,13 +73,14 @@ def add_etapa(id):
     p = current_user.processos.filter_by(id=id).first_or_404()
     form = EtapaForm()
     if form.validate_on_submit():
-        e = Etapa()
-        e.titulo = form.titulo.data
-        e.descricao = form.descricao.data
-        e.dt_inicio = form.dt_inicio.data
-        e.dt_fim = form.dt_fim.data
-        e.processo = p
-        e.save()
+        etapa = Etapa()
+        etapa.titulo = form.titulo.data
+        etapa.descricao = form.descricao.data
+        etapa.dt_inicio = form.dt_inicio.data
+        etapa.dt_fim = form.dt_fim.data
+        etapa.is_finished = form.is_finished.data
+        etapa.processo = p
+        etapa.save()
         flash("Etapa cadastrada com sucesso", "success")
         return redirect(url_for(".get_processo", id=p.id))
     return render_template("etapa/add_etapa.html", form=form, processo=p)
@@ -94,6 +97,7 @@ def edit_etapa(processo_id, etapa_id):
         etapa.descricao = form.descricao.data
         etapa.dt_inicio = form.dt_inicio.data
         etapa.dt_fim = form.dt_fim.data
+        etapa.is_finished = form.is_finished.data
         etapa.save()
         flash("Etapa atualizada com sucesso", "message")
         return redirect(url_for(".get_processo", id=etapa.processo_id))

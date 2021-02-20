@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import StringField, TextAreaField, DateField, SubmitField
+from wtforms.fields import StringField, TextAreaField, DateField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Optional
 from ..models import Processo, Etapa
 
@@ -9,6 +9,7 @@ class ProcessoForm(FlaskForm):
     dt_inicio = DateField("Data inicio", format="%d/%m/%Y")
     dt_fim = DateField("Data fim", format="%d/%m/%Y", validators=[Optional()])
     descricao = TextAreaField("Descrição")
+    is_finished = BooleanField("Encerrado")
     submit = SubmitField("Salvar")
 
     def load_model(self, processo: Processo):
@@ -16,6 +17,7 @@ class ProcessoForm(FlaskForm):
         self.descricao.data = processo.descricao
         self.dt_inicio.data = processo.dt_inicio
         self.dt_fim.data = processo.dt_fim
+        self.is_finished.data = processo.is_finished
 
 
 class DeleteForm(FlaskForm):
@@ -27,6 +29,7 @@ class EtapaForm(FlaskForm):
     dt_inicio = DateField("Data inicio", format="%d/%m/%Y", validators=[DataRequired()])
     dt_fim = DateField("Data fim", format="%d/%m/%Y", validators=[Optional()])
     descricao = TextAreaField("Descricao", validators=[DataRequired()])
+    is_finished = BooleanField("Encerrado")
     salvar = SubmitField("Salvar")
 
     def load_model(self, e: Etapa):
@@ -34,3 +37,4 @@ class EtapaForm(FlaskForm):
         self.descricao.data = e.descricao
         self.dt_inicio.data = e.dt_inicio
         self.dt_fim.data = e.dt_fim
+        self.is_finished.data = e.is_finished
