@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(60), nullable=False, unique=True)
     password_hash = db.Column(db.String(128), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-    processo = db.relationship("Processo", backref="user", cascade="all,delete-orphan", lazy='dynamic')
+    processos = db.relationship("Processo", backref="user", cascade="all,delete-orphan", lazy='dynamic')
 
     def __repr__(self):
         return f"<User {self.email}>"

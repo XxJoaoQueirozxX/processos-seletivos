@@ -25,4 +25,7 @@ def create_app(configuration="default"):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
+    from .processo import processo as processo_blueprint
+    app.register_blueprint(processo_blueprint)
+
     return app

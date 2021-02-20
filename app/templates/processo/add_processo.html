@@ -2,15 +2,13 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
-    Register
+    Processos Seletivos | Cadastrar
 {% endblock %}
 
 {% block page_content %}
     <div class="container mt-3">
-        <h1>Register</h1>
+        <h1>Cadastrar Processo seletivo</h1>
         <hr>
-        {{ wtf.quick_form(form) }}
-        <hr>
-        <p>Já tem uma conta? Faça login <a href="{{ url_for('auth.login') }}">aqui</a></p>
+        {{wtf.quick_form(form)}}
     </div>
 {% endblock %}

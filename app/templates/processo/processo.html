@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Processo | {{ processo.cargo }}
+{% endblock %}
+
+{% block page_content %}
+    <div class="container mt-3">
+        <h1>{{ processo.cargo }}</h1>
+        <hr>
+        <p>{{ processo.descricao }}</p>
+        <p>
+            De {{ processo.dt_inicio.strftime("%d/%m/%Y") }} até
+            {% if processo.dt_fim %}
+                {{ processo.dt_fim.strftime("%d/%m/%Y") }}.
+            {% else %}
+                o momento.
+            {% endif %}
+        </p>
+
+        <h2>Etapas</h2>
+        <hr>
+        <ul>
+            {% for etapa in processo.etapas %}
+                <li>{{ etapa.titulo }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

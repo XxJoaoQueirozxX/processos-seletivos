@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Processos Seletivos
+{% endblock %}
+
+
+{% block page_content %}
+    <div class="container mt-3">
+        <h1>Processos</h1>
+        <hr>
+        <ul>
+            {% for processo in processos %}
+                <a href="{{ url_for('processos.get_processo', id=processo.id) }}">
+                    <li>{{ processo.cargo }}</li>
+                </a>
+            {% endfor %}
+            <a href="{{ url_for('processos.add') }}">Adicionar processo</a>
+        </ul>
+    </div>
+{% endblock %}

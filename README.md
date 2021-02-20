@@ -4,6 +4,7 @@ Web APP padrão MVC para acompanhar processos seletivos desenvolvido com Python 
 
 
 ##Como rodar o projeto
+
 Para rodar o projeto é preciso criar um ambiente virtual com python e instalar as dependencias para fazer isso você pode seguir a sequência de passos a seguir
 
 ### Criando e ativando o ambiente virtual
