@@ -99,3 +99,16 @@ def edit_etapa(processo_id, etapa_id):
         return redirect(url_for(".get_processo", id=etapa.processo_id))
     form.load_model(etapa)
     return render_template("etapa/edit_etapa.html", form=form, etapa=etapa)
+
+
+@processo.route("/processo/<int:processo_id>/etapa/<int:etapa_id>/delete", methods=["GET", "POST"])
+@login_required
+def delete_etapa(processo_id, etapa_id):
+    etapa = current_user.processos.filter_by(id=processo_id).first_or_404() \
+        .etapas.filter_by(id=etapa_id).first_or_404()
+    form = DeleteForm()
+    if form.validate_on_submit():
+        etapa.delete()
+        flash("Etapa deletada com sucesso", "success")
+        return redirect(url_for(".get_processo", id=etapa.processo_id))
+    return render_template("etapa/delete_etapa.html", form=form, etapa=etapa)
