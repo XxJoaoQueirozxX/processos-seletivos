@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block title %}
+    Processo | Deletar
+{% endblock %}
+
+{% block page_content %}
+    <div class="container mt-3">
+        <h1 class="text-center">Deletar processo seletivo</h1>
+        <p>Deseja mesmo deletar esse processo?</p>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <a href="{{ url_for('.get_processo', id=processo.id) }}" class="btn btn-info">Cancelar</a>
+            {{ wtf.form_field(form.deletar, class="btn btn-danger") }}
+        </form>
+    </div>
+{% endblock %}

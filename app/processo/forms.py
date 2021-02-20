@@ -18,5 +18,5 @@ class ProcessoForm(FlaskForm):
         self.dt_fim.data = processo.dt_fim
 
 
-# class DeleteForm(FlaskForm):
-#     deletar = SubmitField("Deletar")
+class DeleteForm(FlaskForm):
+    deletar = SubmitField("Deletar")

@@ -1,7 +1,7 @@
 from flask import redirect, url_for, flash, render_template
 from flask_login import current_user, login_required
 from ..models import Processo
-from .forms import ProcessoForm
+from .forms import ProcessoForm, DeleteForm
 from . import processo
 
 
@@ -51,3 +51,15 @@ def edit(id):
         return redirect(url_for(".get_processo", id=id))
     form.load_model(p)
     return render_template("processo/edit_processo.html", form=form)
+
+
+@processo.route("/processo/<int:id>/delete", methods=["GET", "POST"])
+@login_required
+def delete(id):
+    p = current_user.processos.filter_by(id=id).first_or_404()
+    form = DeleteForm()
+    if form.validate_on_submit():
+        p.delete()
+        flash("Processo deletado com sucesso", "success")
+        return redirect(url_for(".all"))
+    return render_template("processo/delete_processo.html", form=form, processo=p)

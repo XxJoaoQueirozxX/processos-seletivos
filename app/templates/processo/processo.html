@@ -9,6 +9,7 @@
         <h1>{{ processo.cargo }} </h1>
         <p>
             <a href="{{ url_for('processos.edit', id=processo.id) }}"><span class="badge badge-warning">edit</span></a>
+            <a href="{{ url_for('processos.delete', id=processo.id) }}"><span class="badge badge-danger">delete</span></a>
         </p>
         <hr>
         <p>{{ processo.descricao }}</p>
