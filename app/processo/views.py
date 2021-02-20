@@ -1,7 +1,7 @@
 from flask import redirect, url_for, flash, render_template
 from flask_login import current_user, login_required
-from ..models import Processo
-from .forms import ProcessoForm, DeleteForm
+from ..models import Processo, Etapa
+from .forms import ProcessoForm, DeleteForm, EtapaForm
 from . import processo
 
 
@@ -63,3 +63,22 @@ def delete(id):
         flash("Processo deletado com sucesso", "success")
         return redirect(url_for(".all"))
     return render_template("processo/delete_processo.html", form=form, processo=p)
+
+
+@processo.route("/processo/<int:id>/etapas/add", methods=["GET", "POST"])
+@login_required
+def add_etapa(id):
+    p = current_user.processos.filter_by(id=id).first_or_404()
+    form = EtapaForm()
+    if form.validate_on_submit():
+        e = Etapa()
+        e.titulo = form.titulo.data
+        e.descricao = form.descricao.data
+        e.dt_inicio = form.dt_inicio.data
+        e.dt_fim = form.dt_fim.data
+        e.processo = p
+        e.save()
+        flash("Etapa cadastrada com sucesso", "success")
+        return redirect(url_for(".get_processo", id=p.id))
+    return render_template("etapa/add_etapa.html", form=form, processo=p)
+

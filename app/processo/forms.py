@@ -20,3 +20,17 @@ class ProcessoForm(FlaskForm):
 
 class DeleteForm(FlaskForm):
     deletar = SubmitField("Deletar")
+
+
+class EtapaForm(FlaskForm):
+    titulo = StringField("Titulo", validators=[DataRequired(), Length(1, 60)])
+    dt_inicio = DateField("Data inicio", format="%d/%m/%Y", validators=[DataRequired()])
+    dt_fim = DateField("Data fim", format="%d/%m/%Y", validators=[Optional()])
+    descricao = TextAreaField("Descricao", validators=[DataRequired()])
+    salvar = SubmitField("Salvar")
+
+    def load_model(self, e: Etapa):
+        self.titulo.data = e.titulo
+        self.descricao.data = e.descricao
+        self.dt_inicio.data = e.dt_inicio
+        self.dt_fim.data = e.dt_fim

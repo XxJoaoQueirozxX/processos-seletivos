@@ -28,6 +28,7 @@
             {% for etapa in processo.etapas %}
                 <li>{{ etapa.titulo }}</li>
             {% endfor %}
+            <a href="{{ url_for('.add_etapa', id=processo.id) }}"><li>Adicionar etapa</li></a>
         </ul>
     </div>
 {% endblock %}

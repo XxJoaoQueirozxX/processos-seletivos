@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+    {{ processo.cargo }} | Etapas | Cadastrar
+{% endblock %}
+
+{% block page_content %}
+    <div class="container mt-3">
+        <h1>Cadastrar Etapa</h1>
+        <a href="{{ url_for('.get_processo', id=processo.id) }}"><span class="badge badge-dark">Voltar</span></a>
+        <hr>
+        {{wtf.quick_form(form)}}
+    </div>
+{% endblock %}
