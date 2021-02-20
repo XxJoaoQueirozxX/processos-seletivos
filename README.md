@@ -1,6 +1,5 @@
 # APP Processos Seletivos
-Web APP padrão MVC para acompanhar processos seletivos desenvolvido com Python e Flask, nele vocÊ pode fazer um CRUD dos seus processos seletivos bem como as etapas desses processos
-
+Web APP padrão MVC para acompanhar processos seletivos. Desenvolvido com Python e Flask, nele você pode fazer um CRUD dos seus processos seletivos bem como as etapas desses processos.
 
 
 ##Como rodar o projeto
