@@ -1,6 +1,7 @@
 from flask_migrate import Migrate
 from dotenv import load_dotenv
 from app import create_app, db
+from app.models import User, Processo, Etapa
 import click
 
 load_dotenv()
@@ -17,7 +18,7 @@ def init_db():
 @app.shell_context_processor
 def shell_context():
     """Make the shell context for flask shell"""
-    return dict(db=db)
+    return dict(db=db, User=User, Processo=Processo, Etapa=Etapa)
 
 
 @app.cli.command()

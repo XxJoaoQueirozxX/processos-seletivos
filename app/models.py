@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     processo = db.relationship("Processo", backref="user", cascade="all,delete-orphan", lazy='dynamic')
 
     def __repr__(self):
-        return f"<user {self.email}>"
+        return f"<User {self.email}>"
 
     def save(self):
         db.session.add(self)
