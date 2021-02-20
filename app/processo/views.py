@@ -82,3 +82,20 @@ def add_etapa(id):
         return redirect(url_for(".get_processo", id=p.id))
     return render_template("etapa/add_etapa.html", form=form, processo=p)
 
+
+@processo.route("/processo/<int:processo_id>/etapa/<int:etapa_id>/edit", methods=["GET", "POST"])
+@login_required
+def edit_etapa(processo_id, etapa_id):
+    etapa = current_user.processos.filter_by(id=processo_id).first_or_404()\
+        .etapas.filter_by(id=etapa_id).first_or_404()
+    form = EtapaForm()
+    if form.validate_on_submit():
+        etapa.titulo = form.titulo.data
+        etapa.descricao = form.descricao.data
+        etapa.dt_inicio = form.dt_inicio.data
+        etapa.dt_fim = form.dt_fim.data
+        etapa.save()
+        flash("Etapa atualizada com sucesso", "message")
+        return redirect(url_for(".get_processo", id=etapa.processo_id))
+    form.load_model(etapa)
+    return render_template("etapa/edit_etapa.html", form=form, etapa=etapa)

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+    {{ etapa.processo.cargo }} | Etapas | Edit
+{% endblock %}
+
+{% block page_content %}
+    <div class="container mt-3">
+        <h1>Editar Etapa</h1>
+        <a href="{{ url_for('.get_processo', id=etapa.processo_id) }}"><span class="badge badge-dark">Voltar</span></a>
+        <hr>
+        {{wtf.quick_form(form)}}
+    </div>
+{% endblock %}

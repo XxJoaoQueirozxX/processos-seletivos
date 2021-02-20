@@ -9,7 +9,8 @@
         <h1>{{ processo.cargo }} </h1>
         <p>
             <a href="{{ url_for('processos.edit', id=processo.id) }}"><span class="badge badge-warning">edit</span></a>
-            <a href="{{ url_for('processos.delete', id=processo.id) }}"><span class="badge badge-danger">delete</span></a>
+            <a href="{{ url_for('processos.delete', id=processo.id) }}"><span
+                    class="badge badge-danger">delete</span></a>
         </p>
         <hr>
         <p>{{ processo.descricao }}</p>
@@ -26,9 +27,19 @@
         <hr>
         <ul>
             {% for etapa in processo.etapas %}
-                <li>{{ etapa.titulo }}</li>
+                <li>
+                    {{ etapa.titulo }}|
+                    <a href="{{ url_for('.edit_etapa', processo_id=processo.id, etapa_id=etapa.id) }}">
+                        <span class="badge badge-warning">Editar</span>
+                    </a> |
+                    <a href="#">
+                        <span class="badge badge-danger">Excluir</span>
+                    </a>
+                </li>
             {% endfor %}
-            <a href="{{ url_for('.add_etapa', id=processo.id) }}"><li>Adicionar etapa</li></a>
+            <a href="{{ url_for('.add_etapa', id=processo.id) }}">
+                <li>Adicionar etapa</li>
+            </a>
         </ul>
     </div>
 {% endblock %}
