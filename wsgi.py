@@ -20,11 +20,6 @@ def shell_context():
     return dict(db=db)
 
 
-@app.route("/")
-def index():
-    return f"<h1>Home</h1>"
-
-
 @app.cli.command()
 @click.argument('test_names', nargs=-1)
 def test(test_names):
