@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block page_content %}
+    <div class="container">
+        <h1>Olá</h1>
+        <hr>
+        <h3>Você ainda não confirmou sua conta</h3>
+        <p>
+            Antes de poder acessar esse site você precisa confirmar a sua conta. Por favor confira sua caixa de entrada, você deve ter recebido um email com um link de confirmação
+        </p>
+
+        <p>
+            Precisa de outro link de confirmação? <a href="{{ url_for('auth.resend_confirmation') }}">Clique aqui</a>
+        </p>
+    </div>
+{% endblock %}

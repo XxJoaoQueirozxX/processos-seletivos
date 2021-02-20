@@ -1,0 +1,5 @@
+Olá, tudo bem?
+
+Confirme sua conta
+Para confirmar sua conta copie e cole esse endereço na barra de navegação do seu navegador:
+{{ url_for('auth.confirm', token=token, _external=True) }}

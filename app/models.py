@@ -1,6 +1,8 @@
 from datetime import datetime
 from werkzeug.security import check_password_hash, generate_password_hash
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_login import UserMixin
+from flask import current_app
 from . import db, login_manager
 
 
@@ -39,6 +41,24 @@ class User(db.Model, UserMixin):
 
     def confirm_password(self, pwd: str):
         return check_password_hash(self.password_hash, pwd)
+
+    def generate_confirmation_token(self, expires_in=3600):
+        s = Serializer(current_app.config["SECRET_KEY"], expires_in)
+        token = s.dumps({"confirm": self.id}).decode("utf-8")
+        return token
+
+    def confirm(self, token):
+        s = Serializer(current_app.config["SECRET_KEY"])
+
+        try:
+            data = s.loads(token.encode("utf-8"))
+            data = data["confirm"]
+        except:
+            return False
+        if data == self.id:
+            self.confirmed = True
+            self.save()
+        return self.confirmed
 
 
 class Processo(db.Model):

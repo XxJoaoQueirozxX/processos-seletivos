@@ -1,6 +1,7 @@
 import unittest
 from app import create_app, db
 from app.models import User
+from time import sleep
 
 
 class UserModelTest(unittest.TestCase):
@@ -33,3 +34,21 @@ class UserModelTest(unittest.TestCase):
         u = User(password='teste')
         u2 = User(password='teste')
         self.assertTrue(u.password_hash != u2.password_hash)
+
+    def test_account_confirmation_token(self):
+        u = User(email="teste@gmail.com", password="teste")
+        u.save()
+        self.assertFalse(u.confirmed)
+        token = u.generate_confirmation_token()
+        self.assertTrue(u.confirm(token))
+        self.assertTrue(u.confirmed)
+        u.delete()
+
+    def test_confirmation_token_expires(self):
+        u = User(email="teste@gmail.com", password="teste")
+        u.save()
+        self.assertFalse(u.confirmed)
+        token = u.generate_confirmation_token(1)
+        sleep(2)
+        self.assertFalse(u.confirm(token))
+        self.assertFalse(u.confirmed)

@@ -1,0 +1,8 @@
+<p>Olá, tudo bem?</p>
+
+<p>Confirme sua conta </p>
+
+<p>Para confirmar sua conta clique <a href="{{ url_for('auth.confirm', token=token, _external=True) }}">aqui</a>.</p>
+
+<p>Você também pode confirmar sua conta copiando e colando esse endereço na barra de navegação do seu navegador:</p>
+<p>{{ url_for('auth.confirm', token=token, _external=True) }}</p>
