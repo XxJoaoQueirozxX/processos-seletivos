@@ -36,3 +36,18 @@ def get_processo(id):
     return render_template("processo/processo.html", processo=p)
 
 
+@processo.route("/processo/<int:id>/edit", methods=["GET", "POST"])
+@login_required
+def edit(id):
+    p = current_user.processos.filter_by(id=id).first_or_404()
+    form = ProcessoForm()
+    if form.validate_on_submit():
+        p.cargo = form.cargo.data
+        p.descricao = form.descricao.data
+        p.dt_inicio = form.dt_inicio.data
+        p.dt_fim = form.dt_fim.data
+        p.save()
+        flash("Processo atualizado com sucesso", "success")
+        return redirect(url_for(".get_processo", id=id))
+    form.load_model(p)
+    return render_template("processo/edit_processo.html", form=form)

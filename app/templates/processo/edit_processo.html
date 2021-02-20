@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+    Processos Seletivos | Editar
+{% endblock %}
+
+{% block page_content %}
+    <div class="container mt-3">
+        <h1>Editar processo seletivo</h1>
+        <hr>
+        {{ wtf.quick_form(form) }}
+    </div>
+{% endblock %}
