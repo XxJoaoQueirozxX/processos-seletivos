@@ -66,6 +66,7 @@ class Processo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.ForeignKey("users.id"))
     cargo = db.Column(db.String(60), nullable=False)
+    empresa = db.Column(db.String(40), nullable=False, default="")
     descricao = db.Column(db.Text())
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     dt_inicio = db.Column(db.Date, nullable=False)

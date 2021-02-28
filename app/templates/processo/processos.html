@@ -9,13 +9,19 @@
     <div class="container mt-3">
         <h1>Processos</h1>
         <hr>
-        <ul>
+
+        <div class="list-group list-group-flush">
             {% for processo in processos %}
-                <a href="{{ url_for('processos.get_processo', id=processo.id) }}">
-                    <li>{{ processo.cargo }}</li>
+                <a href="{{ url_for('processos.get_processo', id=processo.id) }}"
+                   class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    {{ processo.cargo }} | {{ processo.empresa }}
+                    <span class="badge badge-dark">{{ processo.etapas.count() }} etapas</span>
                 </a>
             {% endfor %}
-            <a href="{{ url_for('processos.add') }}">Adicionar processo</a>
-        </ul>
+
+            <li class="list-group-item">
+                <a href="{{ url_for('processos.add') }}" class="btn btn-outline-info">Adicionar processo</a>
+            </li>
+        </div>
     </div>
 {% endblock %}

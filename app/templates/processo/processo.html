@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Processo | {{ processo.cargo }}
+    Processo | {{ processo.cargo }} ({{ processo.empresa }})
 {% endblock %}
 
 {% block page_content %}
     <div class="container mt-3">
-        <h1>{{ processo.cargo }} </h1>
+        <h1>{{ processo.cargo }} | {{ processo.empresa }} </h1>
         <p>
             <a href="{{ url_for('processos.edit', id=processo.id) }}"><span class="badge badge-warning">edit</span></a>
             <a href="{{ url_for('processos.delete', id=processo.id) }}"><span
@@ -27,10 +27,10 @@
         <hr>
         {% with etapas = processo.etapas %}
             {% if etapas %}
-                <div class="accordion" id="etapas">
+                <div class="accordion " id="etapas">
                     {% for etapa in etapas %}
-                        <div class="card">
-                            <div class="card-header" id="heading-{{ etapa.id }}">
+                        <div class="card border-left mb-3 {% if etapa.is_finished %}border-success{% else %}border-warning{% endif %}">
+                            <div class="card-header " id="heading-{{ etapa.id }}">
                                 <h2 class="mb-0">
                                     <button class="btn btn-link btn-block text-left collapsed" type="button"
                                             data-toggle="collapse" data-target="#collapse-{{ etapa.id }}"
@@ -72,7 +72,7 @@
                 <p>Este processo ainda não possui etapas</p>
             {% endif %}
         {% endwith %}
-        <a href="{{ url_for('.add_etapa', id=processo.id) }}">
+        <a href="{{ url_for('.add_etapa', id=processo.id) }} " class="btn btn-outline-info">
             Adicionar etapa
         </a>
     </div>

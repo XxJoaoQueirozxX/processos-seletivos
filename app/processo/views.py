@@ -19,6 +19,7 @@ def add():
     if form.validate_on_submit():
         p = Processo()
         p.cargo = form.cargo.data
+        p.empresa = form.empresa.data
         p.descricao = form.descricao.data
         p.dt_inicio = form.dt_inicio.data
         p.dt_fim = form.dt_fim.data
@@ -44,6 +45,7 @@ def edit(id):
     form = ProcessoForm()
     if form.validate_on_submit():
         p.cargo = form.cargo.data
+        p.empresa = form.empresa.data
         p.descricao = form.descricao.data
         p.dt_inicio = form.dt_inicio.data
         p.dt_fim = form.dt_fim.data

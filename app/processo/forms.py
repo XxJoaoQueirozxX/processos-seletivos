@@ -6,6 +6,7 @@ from ..models import Processo, Etapa
 
 class ProcessoForm(FlaskForm):
     cargo = StringField("Cargo", validators=[DataRequired(), Length(1, 60, message="O cargo deve ter entre 1 e 60 caracteres")])
+    empresa = StringField("Cargo", validators=[DataRequired(), Length(1, 40, message="O nome da empresa deve ter entre 1 e 40 caracteres")])
     dt_inicio = DateField("Data inicio", format="%d/%m/%Y")
     dt_fim = DateField("Data fim", format="%d/%m/%Y", validators=[Optional()])
     descricao = TextAreaField("Descrição")
@@ -14,6 +15,7 @@ class ProcessoForm(FlaskForm):
 
     def load_model(self, processo: Processo):
         self.cargo.data = processo.cargo
+        self.empresa.data = processo.empresa
         self.descricao.data = processo.descricao
         self.dt_inicio.data = processo.dt_inicio
         self.dt_fim.data = processo.dt_fim
